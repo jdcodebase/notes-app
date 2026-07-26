@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { createNote, updateNote } from "../services/noteService";
 
-const NoteModal = ({ closeModal, onNoteCreated, selectedNote }) => {
+const NoteModal = ({ closeModal, onNoteCreated, selectedNote, fetchNotes }) => {
   const [formData, setFormData] = useState({
     title: "",
     content: "",
@@ -40,6 +40,8 @@ const NoteModal = ({ closeModal, onNoteCreated, selectedNote }) => {
     try {
       if (selectedNote) {
         await updateNote(selectedNote._id, formData);
+
+        fetchNotes();
       } else {
         const res = await createNote(formData);
 

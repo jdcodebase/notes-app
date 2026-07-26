@@ -10,6 +10,7 @@ const Home = () => {
   const [notes, setNotes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedNote, setSelectedNote] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const fetchNotes = async () => {
     try {
@@ -45,6 +46,16 @@ const Home = () => {
     setSelectedNote(null);
   };
 
+  const filteredNotes = notes.filter(
+    (note) =>
+      note.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      note.content.toLowerCase().includes(searchTerm.toLowerCase()),
+  );
+
+  const sortedNotes = [...filteredNotes].sort(
+    (a, b) => new Date(b.updatedAt) - new Date(a.updatedAt),
+  );
+
   if (loading) {
     return <p>Loading notes...</p>;
   }
@@ -59,10 +70,12 @@ const Home = () => {
             setSelectedNote(null);
             setIsOpen(true);
           }}
+          searchTerm={searchTerm}
+          onSearchChange={setSearchTerm}
         />
 
         <NoteCard
-          notes={notes}
+          notes={sortedNotes}
           onEdit={handleEdit}
           onDelete={handleDeleteNote}
         />
@@ -72,6 +85,7 @@ const Home = () => {
             closeModal={() => setIsOpen(false)}
             onNoteCreated={handleNoteCreated}
             selectedNote={selectedNote}
+            fetchNotes={fetchNotes}
           />
         )}
       </main>
