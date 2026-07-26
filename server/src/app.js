@@ -7,10 +7,10 @@ const app = express();
 app.use(express.json());
 app.use(
   cors({
-    origin: "https://notes-web-app-nine.vercel.app/",
+    origin: process.env.CLIENT_URL,
+    credentials: true,
   }),
 );
-
 app.get("/", (req, res) => {
   res.send("API Running successfully");
 });
