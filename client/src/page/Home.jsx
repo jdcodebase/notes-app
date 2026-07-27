@@ -4,6 +4,7 @@ import SearchBar from "../components/SearchBar";
 import NoteCard from "../components/NoteCard";
 import NoteModal from "../components/NoteModal";
 import { getNotes } from "../services/noteService";
+import NotesSkeleton from "../components/NotesSkeleton";
 
 const Home = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -56,10 +57,6 @@ const Home = () => {
     (a, b) => new Date(b.updatedAt) - new Date(a.updatedAt),
   );
 
-  if (loading) {
-    return <p>Loading notes...</p>;
-  }
-
   return (
     <div className="min-h-screen bg-slate-900 text-white pb-3">
       <Navbar />
@@ -74,11 +71,15 @@ const Home = () => {
           onSearchChange={setSearchTerm}
         />
 
-        <NoteCard
-          notes={sortedNotes}
-          onEdit={handleEdit}
-          onDelete={handleDeleteNote}
-        />
+        {loading ? (
+          <NotesSkeleton />
+        ) : (
+          <NoteCard
+            notes={sortedNotes}
+            onEdit={handleEdit}
+            onDelete={handleDeleteNote}
+          />
+        )}
 
         {isOpen && (
           <NoteModal
