@@ -60,7 +60,7 @@ export const updateNote = async (req, res) => {
     if (!mongoose.Types.ObjectId.isValid(id)) {
       return res.status(400).json({
         success: false,
-        message: "Invalid note ID",
+        message: "Invalid note",
       });
     }
 
@@ -114,7 +114,7 @@ export const deleteNote = async (req, res) => {
     if (!mongoose.Types.ObjectId.isValid(id)) {
       return res.status(400).json({
         success: false,
-        message: "Invalid note Id",
+        message: "Invalid note",
       });
     }
 

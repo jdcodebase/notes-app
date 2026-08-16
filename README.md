@@ -31,7 +31,7 @@ The mobile application uses the same REST API and MongoDB backend as the web app
 
 The latest Android APK is available from the project's GitHub Releases.
 
-**[Download Android APK](./releases/app-release.apk)**
+**[Download Android APK](./releases/notes-app-v2.apk)**
 
 After downloading the APK:
 

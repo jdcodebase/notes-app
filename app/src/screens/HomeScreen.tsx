@@ -8,6 +8,7 @@ import NoteModal from '../components/NoteModal';
 
 import { getNotes } from '../services/noteService';
 import { Note } from '../types/note';
+import NotesSkeleton from '../components/NotesSkeleton';
 
 const HomeScreen = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -92,8 +93,7 @@ const HomeScreen = () => {
       />
 
       {loading ? (
-        // Add your NotesSkeleton here
-        <View />
+        <NotesSkeleton />
       ) : (
         <FlatList
           data={sortedNotes}
